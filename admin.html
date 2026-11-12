@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Панель управления галереей</title>
+<style>
+:root{--green:#6b7d5c;--green-d:#4c5c41;--line:#e5e2d8;--bg:#faf8f3}
+body{font-family:Georgia,serif;background:var(--bg);color:#3c3a33;margin:0;padding:24px}
+.wrap{max-width:860px;margin:0 auto}
+h1{font-weight:normal;font-size:26px}
+p.hint{color:#8a8a7e;font-size:14.5px}
+.card{background:#fff;border:1px solid var(--line);padding:18px;margin:14px 0}
+.card input,.card textarea{width:100%;padding:8px;margin:5px 0;border:1px solid var(--line);font-family:inherit;font-size:14.5px;box-sizing:border-box}
+.card textarea{resize:vertical;min-height:54px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>div{flex:1;min-width:120px}
+button{padding:8px 16px;border:1px solid var(--green-d);background:none;cursor:pointer;font-family:inherit;font-size:14px;color:var(--green-d)}
+button:hover{background:var(--green-d);color:#fff}
+.card img{max-width:120px;max-height:90px;display:block;margin-top:8px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
+.arr{font-size:18px;padding:8px 12px}
+#toast{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green-d);color:#fff;padding:12px 26px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Панель управления галереей</h1>
+<p class="hint">Добавляйте, редактируйте и удаляйте работы. Список сохраняется в браузере. По кнопке «Скачать manifest.json» вы получите файл каталога — положите его в корень сайта (рядом с index.html), а файлы картинок — в папку img с теми же именами.</p>
+
+<div class="toolbar">
+  <button onclick="addWork()">＋ Добавить работу</button>
+  <button onclick="save()">💾 Скачать manifest.json</button>
+  <button onclick="restore()">↩ Вернуть из manifest.json</button>
+</div>
+
+<div id="list"></div>
+</div>
+<div id="toast">Скачан manifest.json — положите его в корень сайта</div>
+
+<script>
+let KEY='artist_manifest_draft';
+let works=[];
+function load(){try{works=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){works=[]}if(!works.length){render()}else render()}
+function render(){
+  const L=document.getElementById('list');
+  if(!works.length){L.innerHTML='<p class="hint">Список пуст. Нажмите «Вернуть из manifest.json» или добавьте работу.</p>';return}
+  L.innerHTML=works.map((w,i)=>`<div class="card">
+    <div class="row">
+      <div><label>Название</label><input value="${esc(w.title||'')}" oninput="set(${i},'title',this.value)"></div>
+      <div style="max-width:150px"><label>Категория</label><input value="${esc(w.cat||'')}" oninput="set(${i},'cat',this.value)" placeholder="панно"></div>
+      <div style="max-width:130px"><label>Размер</label><input value="${esc(w.size||'')}" oninput="set(${i},'size',this.value)" placeholder="35×45 см"></div>
+      <div style="max-width:130px"><label>Цена</label><input value="${esc(w.price||'')}" oninput="set(${i},'price',this.value)" placeholder="5 000 ₽"></div>
+    </div>
+    <label>Описание</label><textarea oninput="set(${i},'desc',this.value)">${esc(w.desc||'')}</textarea>
+    <label>Файл картинки (в папке img/, например img/moe_panno.jpg)</label>
+    <input value="${esc(w.file||'')}" oninput="set(${i},'file',this.value)">
+    ${w.file?`<img src="${esc(w.file)}" onerror="this.style.display='none'">`:''}
+    <div class="row" style="margin-top:8px">
+      <button class="arr" onclick="mv(${i},-1)" title="Выше">↑</button>
+      <button class="arr" onclick="mv(${i},1)" title="Ниже">↓</button>
+      <button onclick="del(${i})">✕ Удалить</button>
+    </div>
+  </div>`).join('');
+  localStorage.setItem(KEY,JSON.stringify(works));
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function set(i,k,v){works[i][k]=v;localStorage.setItem(KEY,JSON.stringify(works))}
+function addWork(){works.push({file:'img/...',title:'Новая работа',desc:'',size:'',price:'',cat:'панно'});render()}
+function del(i){if(confirm('Удалить «'+works[i].title+'» из каталога?')){works.splice(i,1);render()}}
+function mv(i,d){const j=i+d;if(j<0||j>=works.length)return;[works[i],works[j]]=[works[j],works[i]];render()}
+function save(){const blob=new Blob([JSON.stringify({title:"Ольга Завьялова · Ботанический барельеф",works},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='manifest.json';a.click();const t=document.getElementById('toast');t.style.display='block';setTimeout(()=>t.style.display='none',3000)}
+function restore(){const inp=document.createElement('input');inp.type='file';inp.accept='.json';inp.onchange=e=>{const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);works=d.works||d;render()}catch(err){alert('Не удалось прочитать файл')}};r.readAsText(e.target.files[0])};inp.click()}
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ольга Завьялова · Ботанический барельеф · Санкт-Петербург</title>
+<meta name="description" content="Ботанический барельеф из гипса: слепки живых растений и цветов. Панно, зеркала, саше. Санкт-Петербург. Автор — Ольга Завьялова.">
+<style>
+:root{
+  --bg:#faf8f3; --panel:#ffffff; --ink:#3c3a33; --muted:#8a8a7e;
+  --green:#6b7d5c; --green-d:#4c5c41; --line:#e5e2d8; --accent:#8fa07e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink);line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header{background:linear-gradient(160deg,#f2f0e8 0%,#e7e9dd 100%);border-bottom:1px solid var(--line)}
+.hero{padding:64px 0 48px;text-align:center}
+.hero .studio{font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+.hero h1{font-size:clamp(30px,5vw,46px);font-weight:normal;letter-spacing:.02em}
+.hero p{max-width:620px;margin:18px auto 0;color:var(--muted);font-style:italic;font-size:18px}
+.btn{display:inline-block;margin-top:26px;padding:12px 34px;border:1px solid var(--green-d);color:var(--green-d);text-decoration:none;font-size:15px;letter-spacing:.08em;transition:.25s}
+.btn:hover{background:var(--green-d);color:#fff}
+nav{display:flex;gap:26px;justify-content:center;padding:14px 0;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+nav a:hover{color:var(--green-d)}
+section{padding:56px 0}
+h2{font-weight:normal;font-size:28px;margin-bottom:8px}
+h2:after{content:"";display:block;width:52px;height:2px;background:var(--accent);margin-top:12px}
+.sec-sub{color:var(--muted);margin-bottom:34px;font-size:16px}
+/* галерея */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.filters button{padding:8px 18px;background:none;border:1px solid var(--line);font-family:inherit;font-size:14px;cursor:pointer;color:var(--muted);transition:.2s}
+.filters button.on,.filters button:hover{border-color:var(--green);color:var(--green-d)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px}
+.card{background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:.25s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(76,92,65,.12)}
+.card img{width:100%;height:230px;object-fit:cover;display:block}
+.card .ci{padding:14px 16px 16px}
+.card .ci h3{font-size:17px;font-weight:normal}
+.card .ci .d{font-size:13.5px;color:var(--muted);margin-top:4px}
+.card .ci .m{font-size:13px;color:var(--green-d);margin-top:8px}
+/* лайтбокс */
+#lb{position:fixed;inset:0;background:rgba(38,40,34,.93);display:none;align-items:center;justify-content:center;z-index:50;padding:30px}
+#lb img{max-width:88vw;max-height:80vh;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#lb .cap{position:absolute;bottom:26px;left:0;right:0;text-align:center;color:#eee;font-size:15px}
+#lb .x{position:absolute;top:18px;right:26px;color:#fff;font-size:34px;cursor:pointer;background:none;border:none}
+#lb .arr{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;cursor:pointer;background:none;border:none;padding:10px}
+#lb .prev{left:14px}#lb .next{right:14px}
+/* обо мне */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:start}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+.about blockquote{border-left:3px solid var(--accent);padding-left:18px;margin:20px 0;font-style:italic;color:var(--green-d)}
+.facts{list-style:none;font-size:15px}
+.facts li{padding:10px 0;border-bottom:1px solid var(--line)}
+.facts b{color:var(--green-d);font-weight:normal}
+/* мк */
+.mkc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.mkc .m{background:var(--panel);border:1px solid var(--line);padding:24px}
+.mkc h3{font-weight:normal;font-size:18px;color:var(--green-d);margin-bottom:8px}
+/* контакты */
+.contact a{color:var(--green-d);text-decoration:none;border-bottom:1px dashed var(--accent)}
+footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;color:var(--muted);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hero">
+    <div class="studio">Студия гипсовой флористики · Санкт-Петербург</div>
+    <h1>Ольга Завьялова</h1>
+    <p>Ботанический барельеф — слепки живых растений и цветов, бережно запечатлённые на гипсовом панно. В каждом барельефе — целая история природы.</p>
+    <a class="btn" href="#gallery">Смотреть работы</a>
+  </div>
+  <nav class="wrap">
+    <a href="#gallery">Галерея</a><a href="#about">Обо мне</a><a href="#mk">Мастер-классы</a><a href="#contacts">Контакты</a>
+  </nav>
+</header>
+
+<section id="gallery" class="wrap">
+  <h2>Галерея работ</h2>
+  <p class="sec-sub">Гипсовые работы — приоритет мастерской: панно, зеркала и саше со слепками живых растений. Многие панно существуют в единственном экземпляре — я не работаю «на поток».</p>
+  <div class="filters" id="filters"></div>
+  <div class="gallery" id="gallery-grid"></div>
+</section>
+
+<section id="about" style="background:#f2f0e8">
+  <div class="wrap about">
+    <div>
+      <h2>Обо мне</h2>
+      <p style="margin-top:18px">Меня зовут Ольга Завьялова — я художник и декоратор, и моё сердце навсегда отдано ботаническим барельефам. Это не просто декор, а уникальные и неповторимые слепки с живых растений и цветов.</p>
+      <p style="margin-top:14px">В работе постоянно экспериментирую с материалами и растениями, ищу новые способы раскрыть природную эстетику. Создаю барельефы в самых разных форматах — от изящных маленьких саше до монументальных панно, которые становятся выразительным акцентом пространства.</p>
+      <blockquote>«Такая работа становится настоящим украшением интерьера, привносит в дом ощущение гармонии и живой красоты».</blockquote>
+      <p style="color:var(--muted);font-size:15px">Барельефы из гипса идеально подходят интерьерам в стиле минимализм, сканди и современная классика — добавляют пространству глубину и характер.</p>
+    </div>
+    <ul class="facts">
+      <li><b>Форматы:</b> от саше до больших интерьерных панно</li>
+      <li><b>Техника:</b> слепки живых растений, тонирование акварелью</li>
+      <li><b>Оформление:</b> багет, дерево, зеркало — по желанию</li>
+      <li><b>Каждая работа</b> существует в единственном экземпляре</li>
+      <li><b>Сотрудничество</b> с мастерами разных техник</li>
+      <li><b>Город:</b> Санкт-Петербург</li>
+    </ul>
+  </div>
+</section>
+
+<section id="mk" class="wrap">
+  <h2>Мастер-классы</h2>
+  <p class="sec-sub">Приглашаю прикоснуться к удивительному миру ботанического барельефа — пусть частичка природы поселится и в вашем доме.</p>
+  <div class="mkc">
+    <div class="m"><h3>Индивидуальные и парные</h3><p>Проводятся по запросу в удобное время. Локацию подбираю под вас, все детали обсуждаем индивидуально.</p></div>
+    <div class="m"><h3>Групповые</h3><p>От трёх человек. Создаём объёмное панно 25–30 см из гипса и живых цветов — для дома или в подарок.</p></div>
+    <div class="m"><h3>Корпоративные</h3><p>Творческое событие для команды. Записаться можно в личных сообщениях ВКонтакте.</p></div>
+    <div class="m"><h3>Курсы и сертификаты</h3><p>Обучаю мастеров своего дела. Подарочный сертификат на мастер-класс — красивый подарок.</p></div>
+  </div>
+</section>
+
+<section id="contacts" style="background:#f2f0e8">
+  <div class="wrap contact">
+    <h2>Контакты и заказ</h2>
+    <p style="margin-top:16px">Напишите мне в личные сообщения — отвечу, пришлю фото доступных работ и расскажу детали.</p>
+    <p style="margin-top:12px;font-size:17px">
+      🌿 Личные сообщения ВКонтакте: <a href="https://vk.ru/slavianka_batic" target="_blank" rel="noopener">vk.ru/slavianka_batic</a><br>
+      🌿 Группа «Ботанический барельеф»: <a href="https://vk.ru/zavialova_art" target="_blank" rel="noopener">vk.ru/zavialova_art</a><br>
+      🌿 Каталог работ в Telegram: <a href="https://t.me/olgaflorart" target="_blank" rel="noopener">t.me/olgaflorart</a><br>
+      🌿 Купить готовые работы: <a href="https://vk.ru/market-227767423" target="_blank" rel="noopener">товары ВКонтакте</a>
+    </p>
+    <p style="margin-top:18px;color:var(--muted);font-size:15px">Санкт-Петербург · мастер-классы по запросу в удобное время</p>
+  </div>
+</section>
+
+<footer class="wrap">© 2026 Ольга Завьялова · Ботанический барельеф · Санкт-Петербург</footer>
+
+<div id="lb">
+  <button class="x" onclick="closeLB()">×</button>
+  <button class="arr prev" onclick="nav(-1)">‹</button>
+  <img id="lbimg" src="" alt="">
+  <button class="arr next" onclick="nav(1)">›</button>
+  <div class="cap" id="lbcap"></div>
+</div>
+
+<script>
+let WORKS=[],shown=[],idx=0;
+fetch('manifest.json').then(r=>r.json()).then(m=>{
+  WORKS=m.works||[];
+  render(WORKS);
+  const cats=[...new Set(WORKS.map(w=>w.cat).filter(Boolean))];
+  const f=document.getElementById('filters');
+  f.innerHTML='<button class="on" data-c="">Все работы</button>'+cats.map(c=>'<button data-c="'+c+'">'+c+'</button>').join('');
+  f.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    f.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    const c=b.dataset.c;render(c?WORKS.filter(w=>w.cat===c):WORKS);
+  });
+});
+function render(list){
+  shown=list;const g=document.getElementById('gallery-grid');
+  g.innerHTML=list.map((w,i)=>'<div class="card" onclick="openLB('+i+')"><img src="'+w.file+'" alt="'+w.title+'" loading="lazy"><div class="ci"><h3>'+w.title+'</h3><div class="d">'+(w.desc||'')+'</div><div class="m">'+[w.size,w.price].filter(Boolean).join(' · ')+'</div></div></div>').join('');
+}
+function openLB(i){idx=i;show()}function show(){const w=shown[idx];document.getElementById('lb').style.display='flex';document.getElementById('lbimg').src=w.file;document.getElementById('lbcap').textContent=w.title+(w.desc?' — '+w.desc:'')}
+function closeLB(){document.getElementById('lb').style.display='none'}
+function nav(d){idx=(idx+d+shown.length)%shown.length;show()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')nav(-1);if(e.key==='ArrowRight')nav(1)});
+</script>
+</body>
+</html>
