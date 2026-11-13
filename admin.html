@@ -4,73 +4,117 @@
 <meta charset="UTF-8">
 <title>Панель управления галереей</title>
 <style>
-:root{--green:#6b7d5c;--green-d:#4c5c41;--line:#e5e2d8;--bg:#faf8f3}
-body{font-family:Georgia,serif;background:var(--bg);color:#3c3a33;margin:0;padding:24px}
-.wrap{max-width:860px;margin:0 auto}
-h1{font-weight:normal;font-size:26px}
-p.hint{color:#8a8a7e;font-size:14.5px}
-.card{background:#fff;border:1px solid var(--line);padding:18px;margin:14px 0}
-.card input,.card textarea{width:100%;padding:8px;margin:5px 0;border:1px solid var(--line);font-family:inherit;font-size:14.5px;box-sizing:border-box}
-.card textarea{resize:vertical;min-height:54px}
-.row{display:flex;gap:10px;flex-wrap:wrap}
-.row>div{flex:1;min-width:120px}
-button{padding:8px 16px;border:1px solid var(--green-d);background:none;cursor:pointer;font-family:inherit;font-size:14px;color:var(--green-d)}
-button:hover{background:var(--green-d);color:#fff}
-.card img{max-width:120px;max-height:90px;display:block;margin-top:8px}
-.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
-.arr{font-size:18px;padding:8px 12px}
-#toast{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green-d);color:#fff;padding:12px 26px;font-size:15px}
+:root{--dark:#2e4a3a;--sage:#7a8b6f;--cream:#f6f4ef;--danger:#a4432f}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:var(--cream);color:#2b2b28;padding:28px;line-height:1.5}
+h1{color:var(--dark);font-weight:normal;margin-bottom:6px}
+.sub{color:#6f6f66;margin-bottom:24px;font-size:.95rem}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+button{font-family:inherit;cursor:pointer;border-radius:8px;padding:10px 18px;font-size:.92rem;border:1.5px solid var(--dark);background:#fff;color:var(--dark);transition:.15s}
+button:hover{background:var(--dark);color:#fff}
+button.primary{background:var(--dark);color:#fff}
+button.primary:hover{background:#233b2e}
+button.mini{padding:5px 10px;font-size:.82rem;border-radius:6px}
+button.danger{border-color:var(--danger);color:var(--danger)}
+button.danger:hover{background:var(--danger);color:#fff}
+.work{background:#fff;border:1px solid #e3ded2;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 6px rgba(40,50,40,.06)}
+.work .head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.work .num{background:var(--dark);color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex:none}
+.work .head b{color:var(--dark);font-weight:normal;font-size:1.05rem;flex:1}
+.work .head .btns{display:flex;gap:6px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+label{font-size:.8rem;color:#6f6f66;display:block;margin-bottom:3px}
+input,textarea,select{width:100%;font-family:inherit;font-size:.92rem;padding:8px 10px;border:1px solid #cfc9b8;border-radius:7px;background:#fbfaf6}
+textarea{grid-column:1/-1;resize:vertical;min-height:56px}
+.thumb{width:64px;height:48px;object-fit:cover;border-radius:6px;border:1px solid #ddd}
+.note{background:#efece2;border-left:4px solid var(--sage);padding:14px 16px;border-radius:0 8px 8px 0;margin-bottom:22px;font-size:.9rem}
 </style>
 </head>
 <body>
-<div class="wrap">
 <h1>Панель управления галереей</h1>
-<p class="hint">Добавляйте, редактируйте и удаляйте работы. Список сохраняется в браузере. По кнопке «Скачать manifest.json» вы получите файл каталога — положите его в корень сайта (рядом с index.html), а файлы картинок — в папку img с теми же именами.</p>
+<p class="sub">Добавляйте, редактируйте и удаляйте работы. Панель работает офлайн, список хранится в вашем браузере. Когда закончите — нажмите «Скачать manifest.json» и загрузите файл на GitHub (заменить старый).</p>
+<div class="note"><b>Как опубликовать изменения:</b> 1) скачайте manifest.json кнопкой ниже; 2) на GitHub: Add file → Upload files → выберите manifest.json (и картинки работ, если добавили новые) → Commit changes; 3) через 1–2 минуты галерея на сайте обновится. Имена картинок — только латиницей, без пробелов (например <i>peony_white.jpg</i>).</div>
 
-<div class="toolbar">
-  <button onclick="addWork()">＋ Добавить работу</button>
-  <button onclick="save()">💾 Скачать manifest.json</button>
-  <button onclick="restore()">↩ Вернуть из manifest.json</button>
+<div class="bar">
+  <button class="primary" onclick="addWork()">+ Добавить работу</button>
+  <button onclick="document.getElementById('imp').click()">Импорт manifest.json</button>
+  <input type="file" id="imp" accept=".json" style="display:none" onchange="importManifest(this)">
+  <button onclick="exportManifest()">⬇ Скачать manifest.json</button>
 </div>
 
 <div id="list"></div>
-</div>
-<div id="toast">Скачан manifest.json — положите его в корень сайта</div>
 
 <script>
-let KEY='artist_manifest_draft';
-let works=[];
-function load(){try{works=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){works=[]}if(!works.length){render()}else render()}
-function render(){
-  const L=document.getElementById('list');
-  if(!works.length){L.innerHTML='<p class="hint">Список пуст. Нажмите «Вернуть из manifest.json» или добавьте работу.</p>';return}
-  L.innerHTML=works.map((w,i)=>`<div class="card">
-    <div class="row">
-      <div><label>Название</label><input value="${esc(w.title||'')}" oninput="set(${i},'title',this.value)"></div>
-      <div style="max-width:150px"><label>Категория</label><input value="${esc(w.cat||'')}" oninput="set(${i},'cat',this.value)" placeholder="панно"></div>
-      <div style="max-width:130px"><label>Размер</label><input value="${esc(w.size||'')}" oninput="set(${i},'size',this.value)" placeholder="35×45 см"></div>
-      <div style="max-width:130px"><label>Цена</label><input value="${esc(w.price||'')}" oninput="set(${i},'price',this.value)" placeholder="5 000 ₽"></div>
-    </div>
-    <label>Описание</label><textarea oninput="set(${i},'desc',this.value)">${esc(w.desc||'')}</textarea>
-    <label>Файл картинки (в папке img/, например img/moe_panno.jpg)</label>
-    <input value="${esc(w.file||'')}" oninput="set(${i},'file',this.value)">
-    ${w.file?`<img src="${esc(w.file)}" onerror="this.style.display='none'">`:''}
-    <div class="row" style="margin-top:8px">
-      <button class="arr" onclick="mv(${i},-1)" title="Выше">↑</button>
-      <button class="arr" onclick="mv(${i},1)" title="Ниже">↓</button>
-      <button onclick="del(${i})">✕ Удалить</button>
-    </div>
-  </div>`).join('');
-  localStorage.setItem(KEY,JSON.stringify(works));
+var KEY='botrelief_manifest';
+var works = load();
+function load(){
+  try{ var w = JSON.parse(localStorage.getItem(KEY)); if(Array.isArray(w)) return w; }catch(e){}
+  try{ return JSON.parse(JSON.stringify(DEMO)); }catch(e){ return []; }
 }
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
-function set(i,k,v){works[i][k]=v;localStorage.setItem(KEY,JSON.stringify(works))}
-function addWork(){works.push({file:'img/...',title:'Новая работа',desc:'',size:'',price:'',cat:'панно'});render()}
-function del(i){if(confirm('Удалить «'+works[i].title+'» из каталога?')){works.splice(i,1);render()}}
-function mv(i,d){const j=i+d;if(j<0||j>=works.length)return;[works[i],works[j]]=[works[j],works[i]];render()}
-function save(){const blob=new Blob([JSON.stringify({title:"Ольга Завьялова · Ботанический барельеф",works},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='manifest.json';a.click();const t=document.getElementById('toast');t.style.display='block';setTimeout(()=>t.style.display='none',3000)}
-function restore(){const inp=document.createElement('input');inp.type='file';inp.accept='.json';inp.onchange=e=>{const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);works=d.works||d;render()}catch(err){alert('Не удалось прочитать файл')}};r.readAsText(e.target.files[0])};inp.click()}
-load();
+var DEMO = null;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(works)); }catch(e){} }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+function addWork(){
+  works.push({id:'work'+Date.now(), title:'Новая работа', category:'Панно', size:'', price:'по запросу', desc:'', img:'img/new_work.jpg'});
+  save(); render();
+}
+function del(i){ if(confirm('Удалить работу «'+works[i].title+'» из каталога?')){ works.splice(i,1); save(); render(); } }
+function up(i){ if(i>0){ var t=works[i-1]; works[i-1]=works[i]; works[i]=t; save(); render(); } }
+function down(i){ if(i<works.length-1){ var t=works[i+1]; works[i+1]=works[i]; works[i]=t; save(); render(); } }
+
+function upd(i,k,v){ works[i][k]=v; save(); if(k==='img'||k==='title'){ var th=document.getElementById('th'+i); if(k==='img'&&th) th.src=v; var h=document.getElementById('h'+i); if(k==='title'&&h) h.textContent=v; } }
+
+function render(){
+  var el = document.getElementById('list'); el.innerHTML='';
+  works.forEach(function(w,i){
+    var d = document.createElement('div'); d.className='work';
+    d.innerHTML =
+      '<div class="head"><span class="num">'+(i+1)+'</span>'+
+      '<img class="thumb" id="th'+i+'" src="'+esc(w.img)+'" onerror="this.src=\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2248%22><rect width=%2264%22 height=%2248%22 fill=%22%23e8e4d8%22/></svg>\'">'+
+      '<b id="h'+i+'">'+esc(w.title)+'</b>'+
+      '<span class="btns">'+
+        '<button class="mini" onclick="up('+i+')" title="Выше">↑</button>'+
+        '<button class="mini" onclick="down('+i+')" title="Ниже">↓</button>'+
+        '<button class="mini danger" onclick="del('+i+')">Удалить</button>'+
+      '</span></div>'+
+      '<div class="fields">'+
+        '<div><label>Название</label><input value="'+esc(w.title)+'" oninput="upd('+i+',\'title\',this.value)"></div>'+
+        '<div><label>Категория</label><select onchange="upd('+i+',\'category\',this.value)">'+['Панно','Зеркала','Серии','Саше'].map(function(c){return '<option'+(w.category===c?' selected':'')+'>'+c+'</option>';}).join('')+'</select></div>'+
+        '<div><label>Размер</label><input value="'+esc(w.size)+'" oninput="upd('+i+',\'size\',this.value)"></div>'+
+        '<div><label>Цена</label><input value="'+esc(w.price)+'" oninput="upd('+i+',\'price\',this.value)"></div>'+
+        '<div><label>Файл картинки (путь)</label><input value="'+esc(w.img)+'" oninput="upd('+i+',\'img\',this.value)"></div>'+
+        '<textarea placeholder="Описание" oninput="upd('+i+',\'desc\',this.value)">'+esc(w.desc)+'</textarea>'+
+      '</div>';
+    el.appendChild(d);
+  });
+}
+function exportManifest(){
+  var m = {works: works};
+  var blob = new Blob([JSON.stringify(m, null, 2)], {type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'manifest.json'; a.click();
+  URL.revokeObjectURL(a.href);
+}
+function importManifest(inp){
+  var f = inp.files[0]; if(!f) return;
+  var r = new FileReader();
+  r.onload = function(){
+    try{
+      var m = JSON.parse(r.result);
+      works = Array.isArray(m) ? m : (m.works || []);
+      save(); render(); alert('Загружено работ: ' + works.length);
+    }catch(e){ alert('Не удалось прочитать файл: ' + e); }
+  };
+  r.readAsText(f); inp.value='';
+}
+
+// seed from current manifest.json if first run
+fetch('manifest.json').then(function(r){return r.json()}).then(function(m){
+  if(m && m.works && m.works.length && !localStorage.getItem(KEY)){
+    works = m.works; save(); render();
+  }
+}).catch(function(){}).finally(function(){ render(); });
 </script>
 </body>
 </html>

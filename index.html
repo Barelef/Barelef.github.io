@@ -3,162 +3,275 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ольга Завьялова · Ботанический барельеф · Санкт-Петербург</title>
-<meta name="description" content="Ботанический барельеф из гипса: слепки живых растений и цветов. Панно, зеркала, саше. Санкт-Петербург. Автор — Ольга Завьялова.">
+<title>Ботанический барельеф — Ольга Завьялова | СПб</title>
+<meta name="description" content="Студия гипсовой флористики и ботанического барельефа в Санкт-Петербурге. Панно, зеркала, саше, мастер-классы.">
 <style>
 :root{
-  --bg:#faf8f3; --panel:#ffffff; --ink:#3c3a33; --muted:#8a8a7e;
-  --green:#6b7d5c; --green-d:#4c5c41; --line:#e5e2d8; --accent:#8fa07e;
+  --dark:#2e4a3a; --sage:#7a8b6f; --sage-l:#9db38a; --cream:#f6f4ef;
+  --card:#ffffff; --ink:#2b2b28; --muted:#6f6f66; --gold:#c9a961;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink);line-height:1.65}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-header{background:linear-gradient(160deg,#f2f0e8 0%,#e7e9dd 100%);border-bottom:1px solid var(--line)}
-.hero{padding:64px 0 48px;text-align:center}
-.hero .studio{font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
-.hero h1{font-size:clamp(30px,5vw,46px);font-weight:normal;letter-spacing:.02em}
-.hero p{max-width:620px;margin:18px auto 0;color:var(--muted);font-style:italic;font-size:18px}
-.btn{display:inline-block;margin-top:26px;padding:12px 34px;border:1px solid var(--green-d);color:var(--green-d);text-decoration:none;font-size:15px;letter-spacing:.08em;transition:.25s}
-.btn:hover{background:var(--green-d);color:#fff}
-nav{display:flex;gap:26px;justify-content:center;padding:14px 0;flex-wrap:wrap}
-nav a{color:var(--ink);text-decoration:none;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
-nav a:hover{color:var(--green-d)}
-section{padding:56px 0}
-h2{font-weight:normal;font-size:28px;margin-bottom:8px}
-h2:after{content:"";display:block;width:52px;height:2px;background:var(--accent);margin-top:12px}
-.sec-sub{color:var(--muted);margin-bottom:34px;font-size:16px}
-/* галерея */
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
-.filters button{padding:8px 18px;background:none;border:1px solid var(--line);font-family:inherit;font-size:14px;cursor:pointer;color:var(--muted);transition:.2s}
-.filters button.on,.filters button:hover{border-color:var(--green);color:var(--green-d)}
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px}
-.card{background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:.25s}
-.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(76,92,65,.12)}
-.card img{width:100%;height:230px;object-fit:cover;display:block}
-.card .ci{padding:14px 16px 16px}
-.card .ci h3{font-size:17px;font-weight:normal}
-.card .ci .d{font-size:13.5px;color:var(--muted);margin-top:4px}
-.card .ci .m{font-size:13px;color:var(--green-d);margin-top:8px}
-/* лайтбокс */
-#lb{position:fixed;inset:0;background:rgba(38,40,34,.93);display:none;align-items:center;justify-content:center;z-index:50;padding:30px}
-#lb img{max-width:88vw;max-height:80vh;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-#lb .cap{position:absolute;bottom:26px;left:0;right:0;text-align:center;color:#eee;font-size:15px}
-#lb .x{position:absolute;top:18px;right:26px;color:#fff;font-size:34px;cursor:pointer;background:none;border:none}
-#lb .arr{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;cursor:pointer;background:none;border:none;padding:10px}
-#lb .prev{left:14px}#lb .next{right:14px}
-/* обо мне */
-.about{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:start}
-@media(max-width:760px){.about{grid-template-columns:1fr}}
-.about blockquote{border-left:3px solid var(--accent);padding-left:18px;margin:20px 0;font-style:italic;color:var(--green-d)}
-.facts{list-style:none;font-size:15px}
-.facts li{padding:10px 0;border-bottom:1px solid var(--line)}
-.facts b{color:var(--green-d);font-weight:normal}
-/* мк */
-.mkc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.mkc .m{background:var(--panel);border:1px solid var(--line);padding:24px}
-.mkc h3{font-weight:normal;font-size:18px;color:var(--green-d);margin-bottom:8px}
-/* контакты */
-.contact a{color:var(--green-d);text-decoration:none;border-bottom:1px dashed var(--accent)}
-footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;color:var(--muted);font-size:13.5px}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;color:var(--ink);background:var(--cream);line-height:1.6}
+img{display:block;max-width:100%}
+a{color:var(--dark)}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(246,244,239,.94);backdrop-filter:blur(6px);border-bottom:1px solid #e3ded2}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dark);text-decoration:none;font-weight:bold}
+.brand span{color:var(--sage)}
+.nav ul{display:flex;gap:22px;list-style:none}
+.nav a{color:var(--ink);text-decoration:none;font-size:.95rem}
+.nav a:hover{color:var(--dark);text-decoration:underline}
+@media(max-width:720px){.nav ul{display:none}}
+
+/* hero */
+.hero{padding:72px 0 60px;text-align:center;background:linear-gradient(180deg,#eceadf 0%,var(--cream) 100%)}
+.badge{display:inline-block;border:1px solid var(--sage);color:var(--dark);border-radius:30px;padding:6px 18px;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);color:var(--dark);font-weight:normal;line-height:1.2}
+.hero h1 em{font-style:italic;color:var(--sage)}
+.hero p{max-width:560px;margin:18px auto 28px;color:var(--muted);font-size:1.08rem}
+.btn{display:inline-block;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:.95rem;letter-spacing:.04em;margin:0 6px;transition:.2s}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-dark:hover{background:#233b2e}
+.btn-ghost{border:1.5px solid var(--dark);color:var(--dark)}
+.btn-ghost:hover{background:var(--dark);color:#fff}
+
+/* sections */
+section{padding:64px 0}
+.sec-title{text-align:center;font-size:1.9rem;color:var(--dark);font-weight:normal;margin-bottom:8px}
+.sec-title::after{content:"";display:block;width:64px;height:2px;background:var(--sage-l);margin:14px auto 0}
+.sec-sub{text-align:center;color:var(--muted);max-width:620px;margin:14px auto 0}
+
+/* filters + gallery */
+.filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:28px 0 32px}
+.chip{border:1px solid var(--sage);background:transparent;color:var(--dark);border-radius:30px;padding:8px 20px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.2s}
+.chip.active,.chip:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(40,50,40,.08);cursor:pointer;transition:.25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(40,50,40,.15)}
+.card .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#e8e4d8}
+.card img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.card:hover img{transform:scale(1.04)}
+.card .cat{position:absolute;top:12px;left:12px;background:rgba(46,74,58,.88);color:#fff;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px}
+.card .info{padding:16px 18px 18px}
+.card h3{font-size:1.05rem;font-weight:normal;color:var(--dark)}
+.card .meta{font-size:.85rem;color:var(--muted);margin-top:4px}
+.card .price{margin-top:8px;color:var(--dark);font-size:.95rem}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(30,40,32,.92);display:none;align-items:center;justify-content:center;z-index:100;flex-direction:column;padding:24px}
+.lb.open{display:flex}
+.lb img{max-width:min(88vw,900px);max-height:72vh;object-fit:contain;border-radius:8px}
+.lb .cap{color:#e9e6da;margin-top:16px;text-align:center;max-width:640px}
+.lb .cap h3{font-weight:normal;font-size:1.15rem}
+.lb .cap p{font-size:.9rem;color:#bdbaaa}
+.lb .x,.lb .prev,.lb .next{position:absolute;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:26px;width:48px;height:48px;border-radius:50%;cursor:pointer;font-family:inherit}
+.lb .x{top:18px;right:18px}
+.lb .prev{left:14px;top:50%;transform:translateY(-50%)}
+.lb .next{right:14px;top:50%;transform:translateY(-50%)}
+.lb .x:hover,.lb .prev:hover,.lb .next:hover{background:rgba(255,255,255,.28)}
+
+/* about */
+.about{background:#fff}
+.about-grid{display:grid;grid-template-columns:320px 1fr;gap:44px;align-items:center;margin-top:40px}
+@media(max-width:760px){.about-grid{grid-template-columns:1fr}}
+.author-wrap{text-align:center}
+.author-photo{width:260px;height:260px;border-radius:50%;overflow:hidden;margin:0 auto;border:6px solid var(--sage-l);box-shadow:0 8px 24px rgba(40,50,40,.18)}
+.author-photo img{width:100%;height:100%;object-fit:cover}
+.author-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--dark);color:#efece2;font-size:5rem;letter-spacing:.05em}
+.author-name{margin-top:18px;font-size:1.3rem;color:var(--dark)}
+.author-role{color:var(--muted);font-size:.92rem}
+.about-text p{margin-bottom:14px;color:#3d3d38}
+.about-sign{font-style:italic;color:var(--sage);margin-top:6px}
+
+/* workshops */
+.wk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:36px}
+.wk{background:var(--card);border-radius:14px;padding:26px 24px;box-shadow:0 2px 10px rgba(40,50,40,.07);border-top:3px solid var(--sage-l)}
+.wk h3{font-weight:normal;color:var(--dark);font-size:1.1rem;margin-bottom:8px}
+.wk p{font-size:.92rem;color:var(--muted)}
+
+/* contacts */
+.contacts{background:linear-gradient(180deg,#eceadf,var(--cream))}
+.c-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:36px}
+.c-card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 10px rgba(40,50,40,.07);text-align:center}
+.c-card h3{font-weight:normal;color:var(--dark);margin-bottom:6px;font-size:1.05rem}
+.c-card p{font-size:.9rem;color:var(--muted)}
+.c-card a{display:inline-block;margin-top:10px;color:var(--dark);text-decoration:none;border-bottom:1px dashed var(--sage)}
+.c-card a:hover{color:#000}
+
+footer{background:var(--dark);color:#cfd8cd;padding:28px 0;font-size:.88rem}
+footer .container{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+footer a{color:#e9efe4;text-decoration:none}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap hero">
-    <div class="studio">Студия гипсовой флористики · Санкт-Петербург</div>
-    <h1>Ольга Завьялова</h1>
-    <p>Ботанический барельеф — слепки живых растений и цветов, бережно запечатлённые на гипсовом панно. В каждом барельефе — целая история природы.</p>
-    <a class="btn" href="#gallery">Смотреть работы</a>
-  </div>
-  <nav class="wrap">
-    <a href="#gallery">Галерея</a><a href="#about">Обо мне</a><a href="#mk">Мастер-классы</a><a href="#contacts">Контакты</a>
-  </nav>
-</header>
-
-<section id="gallery" class="wrap">
-  <h2>Галерея работ</h2>
-  <p class="sec-sub">Гипсовые работы — приоритет мастерской: панно, зеркала и саше со слепками живых растений. Многие панно существуют в единственном экземпляре — я не работаю «на поток».</p>
-  <div class="filters" id="filters"></div>
-  <div class="gallery" id="gallery-grid"></div>
-</section>
-
-<section id="about" style="background:#f2f0e8">
-  <div class="wrap about">
-    <div>
-      <h2>Обо мне</h2>
-      <p style="margin-top:18px">Меня зовут Ольга Завьялова — я художник и декоратор, и моё сердце навсегда отдано ботаническим барельефам. Это не просто декор, а уникальные и неповторимые слепки с живых растений и цветов.</p>
-      <p style="margin-top:14px">В работе постоянно экспериментирую с материалами и растениями, ищу новые способы раскрыть природную эстетику. Создаю барельефы в самых разных форматах — от изящных маленьких саше до монументальных панно, которые становятся выразительным акцентом пространства.</p>
-      <blockquote>«Такая работа становится настоящим украшением интерьера, привносит в дом ощущение гармонии и живой красоты».</blockquote>
-      <p style="color:var(--muted);font-size:15px">Барельефы из гипса идеально подходят интерьерам в стиле минимализм, сканди и современная классика — добавляют пространству глубину и характер.</p>
-    </div>
-    <ul class="facts">
-      <li><b>Форматы:</b> от саше до больших интерьерных панно</li>
-      <li><b>Техника:</b> слепки живых растений, тонирование акварелью</li>
-      <li><b>Оформление:</b> багет, дерево, зеркало — по желанию</li>
-      <li><b>Каждая работа</b> существует в единственном экземпляре</li>
-      <li><b>Сотрудничество</b> с мастерами разных техник</li>
-      <li><b>Город:</b> Санкт-Петербург</li>
+  <div class="container nav">
+    <a class="brand" href="#top">Ботанический <span>барельеф</span></a>
+    <ul>
+      <li><a href="#gallery">Галерея</a></li>
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#workshops">Мастер-классы</a></li>
+      <li><a href="#contacts">Контакты</a></li>
     </ul>
   </div>
-</section>
+</header>
 
-<section id="mk" class="wrap">
-  <h2>Мастер-классы</h2>
-  <p class="sec-sub">Приглашаю прикоснуться к удивительному миру ботанического барельефа — пусть частичка природы поселится и в вашем доме.</p>
-  <div class="mkc">
-    <div class="m"><h3>Индивидуальные и парные</h3><p>Проводятся по запросу в удобное время. Локацию подбираю под вас, все детали обсуждаем индивидуально.</p></div>
-    <div class="m"><h3>Групповые</h3><p>От трёх человек. Создаём объёмное панно 25–30 см из гипса и живых цветов — для дома или в подарок.</p></div>
-    <div class="m"><h3>Корпоративные</h3><p>Творческое событие для команды. Записаться можно в личных сообщениях ВКонтакте.</p></div>
-    <div class="m"><h3>Курсы и сертификаты</h3><p>Обучаю мастеров своего дела. Подарочный сертификат на мастер-класс — красивый подарок.</p></div>
+<div class="hero" id="top">
+  <div class="container">
+    <div class="badge">Гипсовая флористика · Санкт-Петербург</div>
+    <h1>Ботанический барельеф<br><em>Ольги Завьяловой</em></h1>
+    <p>Живые растения, застывшие в гипсе: панно, зеркала и саше ручной работы. Каждый отпечаток — единственный, второго такого в мире не существует.</p>
+    <a class="btn btn-dark" href="#gallery">Смотреть работы</a>
+    <a class="btn btn-ghost" href="#contacts">Заказать</a>
+  </div>
+</div>
+
+<section id="gallery">
+  <div class="container">
+    <h2 class="sec-title">Галерея работ</h2>
+    <p class="sec-sub">Гипсовые панно, зеркала и саше — основное направление студии. Нажмите на работу, чтобы рассмотреть подробно.</p>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
   </div>
 </section>
 
-<section id="contacts" style="background:#f2f0e8">
-  <div class="wrap contact">
-    <h2>Контакты и заказ</h2>
-    <p style="margin-top:16px">Напишите мне в личные сообщения — отвечу, пришлю фото доступных работ и расскажу детали.</p>
-    <p style="margin-top:12px;font-size:17px">
-      🌿 Личные сообщения ВКонтакте: <a href="https://vk.ru/slavianka_batic" target="_blank" rel="noopener">vk.ru/slavianka_batic</a><br>
-      🌿 Группа «Ботанический барельеф»: <a href="https://vk.ru/zavialova_art" target="_blank" rel="noopener">vk.ru/zavialova_art</a><br>
-      🌿 Каталог работ в Telegram: <a href="https://t.me/olgaflorart" target="_blank" rel="noopener">t.me/olgaflorart</a><br>
-      🌿 Купить готовые работы: <a href="https://vk.ru/market-227767423" target="_blank" rel="noopener">товары ВКонтакте</a>
-    </p>
-    <p style="margin-top:18px;color:var(--muted);font-size:15px">Санкт-Петербург · мастер-классы по запросу в удобное время</p>
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="sec-title">Обо мне</h2>
+    <div class="about-grid">
+      <div class="author-wrap">
+        <div class="author-photo" id="authorPhoto">
+          <!-- Фотография автора: замените img/author.jpg на свой снимок (квадратный, ~800x800) -->
+          <img src="img/author.jpg" alt="Ольга Завьялова" onerror="this.parentNode.innerHTML='<div class=author-ph>ОЗ</div>'">
+        </div>
+        <div class="author-name">Ольга Завьялова</div>
+        <div class="author-role">художник · основатель студии</div>
+      </div>
+      <div class="about-text">
+        <p>Меня зовут Ольга, я работаю с гипсовой флористикой и ботаническим барельефом. Мы живём в удивительном мире природы, и мне хочется останавливать её мгновения — переносить листья, цветы и травы в гипс так, чтобы они остались с нами навсегда.</p>
+        <p>Каждая работа создаётся вручную в Санкт-Петербурге: настоящий растительный материал, гипс, терпение и любовь к деталям. В основе — ботаническая достоверность: вы узнаёте каждое растение.</p>
+        <p>Создаю панно и зеркала на заказ, провожу мастер-классы — от индивидуальных занятий до корпоративных событий.</p>
+        <p class="about-sign">— Ольга</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer class="wrap">© 2026 Ольга Завьялова · Ботанический барельеф · Санкт-Петербург</footer>
+<section id="workshops">
+  <div class="container">
+    <h2 class="sec-title">Мастер-классы</h2>
+    <p class="sec-sub">Создайте собственный барельеф своими руками — ничего не нужно уметь заранее, всё покажу и помогу.</p>
+    <div class="wk-grid">
+      <div class="wk"><h3>Индивидуальные</h3><p>Занятие один на один в удобном темпе — глубокое погружение в технику гипсовой флористики.</p></div>
+      <div class="wk"><h3>Парные</h3><p>Романтичный или дружеский формат: двое, гипс и общая работа — отличный совместный опыт.</p></div>
+      <div class="wk"><h3>Групповые (от 3 человек)</h3><p>Творческая встреча с друзьями: работаем, общаемся, каждый уходит со своим барельефом.</p></div>
+      <div class="wk"><h3>Корпоративные</h3><p>Тимбилдинг и творческие события для команд — спокойный, вдумчивый формат для взрослого коллектива.</p></div>
+      <div class="wk"><h3>Курсы</h3><p>Системное обучение: от первых отпечатков к собственным законченным работам.</p></div>
+      <div class="wk"><h3>Подарочные сертификаты</h3><p>Сертификат на мастер-класс — подарок, который запоминается. Сроки и форматы согласуем.</p></div>
+    </div>
+  </div>
+</section>
 
-<div id="lb">
-  <button class="x" onclick="closeLB()">×</button>
-  <button class="arr prev" onclick="nav(-1)">‹</button>
-  <img id="lbimg" src="" alt="">
-  <button class="arr next" onclick="nav(1)">›</button>
-  <div class="cap" id="lbcap"></div>
+<section id="contacts" class="contacts">
+  <div class="container">
+    <h2 class="sec-title">Контакты и заказ</h2>
+    <p class="sec-sub">Напишите мне — обсудим идею, размер, сроки и стоимость работы или мастер-класса.</p>
+    <div class="c-grid">
+      <div class="c-card"><h3>Личные сообщения ВКонтакте</h3><p>Самый быстрый способ связаться — напишите в личку группы.</p><a href="https://vk.ru/slavianka_batic" target="_blank" rel="noopener">Написать в ЛС</a></div>
+      <div class="c-card"><h3>Группа ВКонтакте</h3><p>Новые работы, процесс создания и анонсы мастер-классов.</p><a href="https://vk.ru/zavialova_art" target="_blank" rel="noopener">Открыть группу</a></div>
+      <div class="c-card"><h3>Каталог в Telegram</h3><p>Актуальный каталог работ и цен в удобном формате.</p><a href="https://t.me/zavialova_art" target="_blank" rel="noopener">Открыть каталог</a></div>
+      <div class="c-card"><h3>Товары ВКонтакте</h3><p>Готовые работы в наличии — можно выбрать и заказать прямо там.</p><a href="https://vk.ru/market/zavialova_art" target="_blank" rel="noopener">Смотреть товары</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© 2026 Ольга Завьялова · Ботанический барельеф · Санкт-Петербург</div>
+    <div><a href="https://vk.ru/zavialova_art">ВКонтакте</a> · <a href="#top">Наверх ↑</a></div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lb" id="lb">
+  <button class="x" id="lbX" aria-label="Закрыть">✕</button>
+  <button class="prev" id="lbPrev" aria-label="Назад">‹</button>
+  <img id="lbImg" src="" alt="">
+  <div class="cap"><h3 id="lbTitle"></h3><p id="lbMeta"></p><p id="lbDesc"></p></div>
+  <button class="next" id="lbNext" aria-label="Вперёд">›</button>
 </div>
 
 <script>
-let WORKS=[],shown=[],idx=0;
-fetch('manifest.json').then(r=>r.json()).then(m=>{
-  WORKS=m.works||[];
-  render(WORKS);
-  const cats=[...new Set(WORKS.map(w=>w.cat).filter(Boolean))];
-  const f=document.getElementById('filters');
-  f.innerHTML='<button class="on" data-c="">Все работы</button>'+cats.map(c=>'<button data-c="'+c+'">'+c+'</button>').join('');
-  f.querySelectorAll('button').forEach(b=>b.onclick=()=>{
-    f.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-    const c=b.dataset.c;render(c?WORKS.filter(w=>w.cat===c):WORKS);
-  });
-});
-function render(list){
-  shown=list;const g=document.getElementById('gallery-grid');
-  g.innerHTML=list.map((w,i)=>'<div class="card" onclick="openLB('+i+')"><img src="'+w.file+'" alt="'+w.title+'" loading="lazy"><div class="ci"><h3>'+w.title+'</h3><div class="d">'+(w.desc||'')+'</div><div class="m">'+[w.size,w.price].filter(Boolean).join(' · ')+'</div></div></div>').join('');
+var FALLBACK_MANIFEST = {"site":{"title":"Ботанический барельеф — Ольга Завьялова | СПб","author":"Ольга Завьялова","subtitle":"Студия гипсовой флористики и ботанического барельефа · Санкт-Петербург"},"works":[{"id":"dyhanie","title":"Диптих «Дыхание природы»","category":"Панно","size":"2 × (35 × 45 см)","price":"по запросу","desc":"Две композиции-парные панели: гипсовые растения на тонированном фоне.","img":"img/dyhanie.jpg"},{"id":"utro_tuman","title":"«Утренний туман»","category":"Панно","size":"35 × 45 см","price":"по запросу","desc":"Монохромный барельеф в дымчатых тонах — цветы, проступающие сквозь утреннюю дымку.","img":"img/utro_tuman.jpg"},{"id":"zerkalo_leto","title":"Панно-зеркало «Отражение лета»","category":"Зеркала","size":"30 × 30 см","price":"по запросу","desc":"Зеркало в обрамлении гипсового луга — летние травы и колосья.","img":"img/zerkalo_leto.jpg"},{"id":"cvetuschaya_vesna","title":"«Цветущая весна»","category":"Панно","size":"—","price":"10 200 ₽","desc":"Светлое весеннее панно с ветками цветущих садовых растений.","img":"img/cvetuschaya_vesna.jpg"},{"id":"vesna_rascvete","title":"«Весна в расцвете»","category":"Панно","size":"—","price":"6 250 ₽","desc":"Барельеф с первоцветами — нежная весенняя композиция в гипсе.","img":"img/vesna_rascvete.jpg"},{"id":"leto_v_sadu","title":"«Лето в саду»","category":"Панно","size":"—","price":"5 000 ₽","desc":"Летний сад в гипсе: полевые травы и садовые цветы.","img":"img/leto_v_sadu.jpg"},{"id":"lisichki","title":"Лесная серия «Лисички»","category":"Серии","size":"—","price":"по запросу","desc":"Осенняя лесная серия: лисички и лесные травы в гипсовом барельефе.","img":"img/lisichki.jpg"},{"id":"veresk_sache","title":"Саше с вереском","category":"Саше","size":"—","price":"по запросу","desc":"Ароматное саше с гипсовым барельефом вереска — подарок или деталь интерьера.","img":"img/veresk_sache.jpg"}]};
+var WORKS = [];
+var CATS = ['Все','Панно','Зеркала','Серии','Саше'];
+var current = -1, shown = [];
+
+function loadManifest(){
+  if(location.protocol.indexOf('http') === 0){
+    return fetch('manifest.json').then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(m){ return (m && m.works && m.works.length) ? m : FALLBACK_MANIFEST; })
+      .catch(function(){ return FALLBACK_MANIFEST; });
+  }
+  return Promise.resolve(FALLBACK_MANIFEST);
 }
-function openLB(i){idx=i;show()}function show(){const w=shown[idx];document.getElementById('lb').style.display='flex';document.getElementById('lbimg').src=w.file;document.getElementById('lbcap').textContent=w.title+(w.desc?' — '+w.desc:'')}
-function closeLB(){document.getElementById('lb').style.display='none'}
-function nav(d){idx=(idx+d+shown.length)%shown.length;show()}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')nav(-1);if(e.key==='ArrowRight')nav(1)});
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function renderFilters(){
+  var f = document.getElementById('filters'); f.innerHTML = '';
+  CATS.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'chip' + (c==='Все' ? ' active' : '');
+    b.textContent = c;
+    b.onclick = function(){
+      document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active'); renderGrid(c);
+    };
+    f.appendChild(b);
+  });
+}
+function renderGrid(cat){
+  var grid = document.getElementById('grid'); grid.innerHTML = '';
+  shown = WORKS.filter(function(w){ return cat==='Все' || w.category===cat; });
+  shown.forEach(function(w){
+    var card = document.createElement('div'); card.className='card';
+    card.innerHTML =
+      '<div class="ph"><span class="cat">'+esc(w.category)+'</span>'+
+      '<img loading="lazy" src="'+esc(w.img)+'" alt="'+esc(w.title)+'" onerror="this.src=\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22><rect width=%22800%22 height=%22600%22 fill=%22%23e8e4d8%22/><text x=%22400%22 y=%22300%22 text-anchor=%22middle%22 font-size=%2236%22 fill=%22%23998%22>'+encodeURIComponent(w.title.slice(0,24))+'</text></svg>\'"></div>'+
+      '<div class="info"><h3>'+esc(w.title)+'</h3>'+
+      '<div class="meta">'+esc(w.size||'')+'</div>'+
+      (w.price && w.price!=='по запросу' ? '<div class="price">'+esc(w.price)+'</div>' : '')+
+      '</div>';
+    card.onclick = function(){ openLb(shown.indexOf(w)); };
+    grid.appendChild(card);
+  });
+}
+function openLb(i){
+  current = i; var w = shown[i];
+  document.getElementById('lbImg').src = w.img;
+  document.getElementById('lbTitle').textContent = w.title;
+  document.getElementById('lbMeta').textContent = [w.category, w.size, w.price].filter(Boolean).join(' · ');
+  document.getElementById('lbDesc').textContent = w.desc || '';
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb(){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; }
+function nav(d){ openLb((current + d + shown.length) % shown.length); }
+document.getElementById('lbX').onclick = closeLb;
+document.getElementById('lbPrev').onclick = function(e){ e.stopPropagation(); nav(-1); };
+document.getElementById('lbNext').onclick = function(e){ e.stopPropagation(); nav(1); };
+document.getElementById('lb').onclick = function(e){ if(e.target.id==='lb') closeLb(); };
+document.addEventListener('keydown', function(e){
+  if(!document.getElementById('lb').classList.contains('open')) return;
+  if(e.key==='Escape') closeLb();
+  if(e.key==='ArrowLeft') nav(-1);
+  if(e.key==='ArrowRight') nav(1);
+});
+loadManifest().then(function(m){ WORKS = m.works || []; renderFilters(); renderGrid('Все'); });
 </script>
 </body>
 </html>
